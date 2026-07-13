@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body style="background:black;color:white;font-family:Arial">
+<h1>Accurate Markets Login</h1>
+<input id='user' placeholder='Username'><br><br>
+<input id='pass' type='password' placeholder='Password'><br><br>
+<button onclick='save()'>Register/Login</button>
+<script>
+function save(){
+localStorage.setItem("user",document.getElementById("user").value);
+alert("Demo login successful");
+}
+</script>
+</body>
+</html>
