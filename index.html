@@ -2534,7 +2534,13 @@ function render(){
 
   let body = '';
   if(S.loadError) body += `<div class="demo-banner" style="border-color:var(--red);"><b>Heads up:</b> ${escapeHtml(S.loadError)}</div>`;
-  if(S.view==='dashboard') body += viewDashboard();
+  // Every view below assumes a signed-in user exists. Before someone finishes signing up
+  // (no S.session yet), none of them are safe to call — skip straight to just the
+  // onboarding modal instead of crashing the whole render on a null user.
+  const userViews = new Set(['dashboard','detail','wallet','mybets','referrals','profile']);
+  if(!S.session && userViews.has(S.view)){
+    body += `<div class="empty" style="margin-top:60px;">👋 Welcome — sign up below to get started.</div>`;
+  } else if(S.view==='dashboard') body += viewDashboard();
   else if(S.view==='markets') body += viewMarkets();
   else if(S.view==='detail') body += viewDetail();
   else if(S.view==='wallet') body += viewWallet();
