@@ -1,6 +1,9 @@
 // Minimal service worker — mainly exists so the browser considers this site
 // installable as an app. Caches the shell for faster repeat loads/basic offline support.
-const CACHE_NAME = 'accurate-markets-v1';
+// IMPORTANT: bump CACHE_NAME (v1 -> v2 -> v3...) any time you want to force every
+// installed app/browser tab to drop its old cached copy and pick up fresh content —
+// otherwise the 'activate' cleanup below has nothing to actually clean up.
+const CACHE_NAME = 'accurate-markets-v2';
 const SHELL = ['/'];
 
 self.addEventListener('install', (event) => {
